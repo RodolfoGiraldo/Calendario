@@ -28,6 +28,7 @@
         </div>
     </div>
 </div>
+
 <div id="myModalSave" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -37,36 +38,62 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
-                    <input type="hidden" id="hdEventID" value="0"/>
+                    <input type="hidden" id="hdEventID" value="0" />
                     <div class="form-group">
                         <label>Subject</label>
-                        <input type="text" id="txtSubject" class="form-control"  />
+                        <input type="text" id="txtSubject" class="form-control" />
                     </div>
                     <div class="form-group">
                         <label>Start</label>
                         <div class="input-group date" id="dtp1">
                             <input type="text" id="txtStart" class="form-control" />
                             <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar" ></span>
+                                <span class="glyphicon glyphicon-calendar"></span>
                             </span>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label><input type="checkbox" id="chkIsFullDay" checked="checked" />¿Este evento es todo el dia?</label>
+                        </div>
+                    </div>
+                    <div class="form-group" id="divEndDate" style="display:none">
+                        <label>End</label>
+                        <div class="input-group date" id="dtp2">
+                            <input type="text" id="txtEnd" class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="txtDescription" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Theme Color</label>
+                        <select id="ddThemeColor" class="form-control">
+                            <option value="">Default</option>
+                            <option value="red">Red</option>
+                            <option value="blue">Blue</option>
+                            <option value="green">Green</option>
+                            <option value="purple">Purple</option>
+                        </select>
+                    </div>
+                    <button type="button" id="btnSave" class="btn btn-success">Save</button>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
 <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
-<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print"/>
-
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="print" />
 @section Scripts{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <script>
         $(document).ready(function () {
             var events = [];
@@ -80,7 +107,7 @@
                     url: "/home/GetEvents",
                     success: function (data) {
                         $.each(data, function (i, v) {
-                            
+
                             events.push({
                                 eventID: v.EventID,
                                 title: v.Subject,
@@ -130,9 +157,9 @@
                 })
             }
 
-            $('#btnEdit').click(function () 
-            {
+            $('#btnEdit').click(function () {
                 //Open modal dialog for edit event
+                openAddEditForm();
             })
 
             $('#btnDelete').click(function () {
@@ -154,6 +181,85 @@
                     })
                 }
             })
+
+            $('#dtp1,#dtp2').datetimepicker({
+                format: 'DD/MM/YYYY HH:mm A'
+            });
+
+            $('#chkIsFullDay').change(function () {
+                if ($(this).is(':checked')) {
+                    $('#divEndDate').hide();
+                } else {
+                    $('#divEndDate').show();
+                }
+            });
+
+            function openAddEditForm() {
+                if (selectedEvent != null) {
+                    $('#hdEventID').val(selectedEvent.eventID);
+                    $('#txtSubject').val(selectedEvent.title);
+                    $('#txtStart').val(selectedEvent.start.format('DD/MM/YYYY HH:mm A'));
+                    $('#chkIsFullDay').prop('checked', selectedEvent.allDay || false);
+                    $('#chkIsFullDay').change();
+                    $('#txtEnd').val(selectedEvent.end != null ? selectedEvent.end.format('DD/MM/YYYY HH:mm A') : '' );
+                    $('#txtDescription').val(selectedEvent.description);
+                    $('#ddThemeColor').val(selectedEvent.color);
+                }
+                $('#myModal').modal('hide');
+                $('#myModalSave').modal('show');
+            }
+
+            $('#btnSave').click(function () {
+                if ($('#txtSubject').val().trim() == "") {
+                    alert('Subjet required');
+                    retunr;
+                }
+                if ($('#txtStart').val().trim() == "") {
+                    alert('Start date required');
+                    retunr;
+                }
+               
+                if ($('#chkIsFullDay').is(':checked') == false && $('#txtStart').val().trim() == "") {
+                    alert('End date required');
+                    retunr;
+                }
+                else {
+                    var startDate = moment($('textStart').val(), "DD/MM/YYYY HH:mm A").toDate();
+                    var endDate = moment($('textEnd').val(), "DD/MM/YYYY HH:mm A").toDate();
+                    if (startDate > endDate) {
+                        alert('Invalidad end date');
+                        return;
+                    }
+                }
+
+                var data = {
+                    EventId: $('#hdEventID').val(),
+                    Subject: $('#txtSubject').val().trim(),
+                    Start: $('#txtStart').val().trim(),
+                    End: $('#chkIsFullDay').is(':checked') ? null : $('#txtEnd').val().trim(),
+                    Description: $('#txtDescription').val(),
+                    ThemeColor: $('#ddThemeColor').val(),
+                }
+                SaveEvent(data);
+            });
+
+            function SaveEvent(data) {
+                $.ajax({
+                    type: "POST",
+                    url: "/home/SaveEvent",
+                    data: data,
+                    success: function (data) {
+                        if (data.status) {
+                            FetchEventAndRenderCalendar();
+
+                            $('#myModalSave').modal('hide');
+                        }
+                    },
+                    error: function () {
+                        alert('Ups! Tenemos un problema');
+                    }
+                })
+            }
         })
     </script>
 }
