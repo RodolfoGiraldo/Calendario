@@ -15,10 +15,10 @@
             </div>
             <div class="modal-body">
                 <button id="btnDelete" class="btn btn-default btn-sm pull-right">
-                    <span class="glyphicon glyphicon-remove"></span> Remove
+                    <span class="glyphicon glyphicon-remove"></span> Eliminar
                 </button>
                 <button id="btnEdit" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
-                    <span class="glyphicon glyphicon-pencil"></span> Edit
+                    <span class="glyphicon glyphicon-pencil"></span> Editar
                 </button>
                 <p id="pDetails"></p>
             </div>
@@ -51,7 +51,7 @@
                         $.each(data, function (i, v) {
                             
                             events.push({
-                                eventID: v.eventID,
+                                eventID: v.EventID,
                                 title: v.Subject,
                                 description: v.Description,
                                 start: moment(v.Start),
@@ -106,11 +106,10 @@
 
             $('#btnDelete').click(function () {
                 if (selectedEvent != null && confirm('¿Estas Seguro?')) {
-                    console.log('SelectEvent: ' + selectedEvent.eventID);
                     $.ajax({
                         type: "POST",
                         url: "/home/DeleteEvent",
-                        data: { 'eventID': selectEvent.eventID },
+                        data: { 'eventID': selectedEvent.eventID },
                         success: function (data) {
                             if (data.status) {
                                 FetchEventAndRenderCalendar();
@@ -119,7 +118,7 @@
                             }
                         },
                         error: function () {
-                            alert('failed');
+                            alert('Ups! Tenemos un problema');
                         }
                     })
                 }
