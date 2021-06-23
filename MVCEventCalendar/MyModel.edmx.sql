@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/22/2021 19:24:21
+-- Date Created: 06/22/2021 23:10:56
 -- Generated from EDMX file: D:\Visual2019\Calendario\MVCEventCalendar\MyModel.edmx
 -- --------------------------------------------------
 
