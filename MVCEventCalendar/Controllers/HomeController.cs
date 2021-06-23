@@ -24,7 +24,7 @@ namespace MVCEventCalendar.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveEvent(Event e){
+        public JsonResult SaveEvent(Events e){
             var status = false;
             using (MyDatabaseEntities dc = new MyDatabaseEntities())
             {

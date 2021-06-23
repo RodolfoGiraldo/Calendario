@@ -25,6 +25,8 @@ namespace MVCEventCalendar
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<Events> Events { get; set; }
+        public virtual DbSet<Login> Login { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }
