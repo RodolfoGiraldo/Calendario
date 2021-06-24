@@ -46,12 +46,13 @@
                     <div class="form-group">
                         <label>Start</label>
                         <div class="input-group date" id="dtp1">
-                            <input type="text" id="txtStart" class="form-control" />
+                            <input type="text" id="txtStart" class="form-control"/>
                             <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
+                                <span class="glyphicon glyphicon-th"></span>
                             </span>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <div class="checkbox">
                             <label><input type="checkbox" id="chkIsFullDay" checked="checked" />¿Este evento es todo el dia?</label>
@@ -95,7 +96,9 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function ()
+        {
+            var bandera = false;
             var events = [];
             var selectedEvent = null;
 
@@ -153,11 +156,40 @@
                         $('#myModal #pDetails').empty().html($description);
 
                         $('#myModal').modal();
-                    }
+                    },
+
+                    selectable: true,
+                    select: function (start, end) {
+                        selectedEvent = {
+                            eventID: 0,
+                            title: '',
+                            description: '',
+                            start: start,
+                            end: end,
+                            allDay: false,
+                            color: '',
+                        }
+                        openAddEditForm();
+                        $('#calendar').fullCalendar('unselect');
+                    },
+                    editable: true,
+                    /*eventDrop: function (event) {
+                        var data = {
+                            EventId: event.eventID,
+                            Subject: event.subject,
+                            Start: event.start.format('DD/MM/YYYY HH:mm A'),
+                            End: event.end != null ? event.end.format('DD/MM/YYYY HH:mm A') : null,
+                            Description: event.description,
+                            ThemeColor: event.color,
+                            IsFullDay: event.allDay
+                        };
+                        SaveEvent(data);
+                    }*/
                 })
             }
 
             $('#btnEdit').click(function () {
+                localStorage.setItem("idUser","1");
                 //Open modal dialog for edit event
                 openAddEditForm();
             })
@@ -212,16 +244,16 @@
             $('#btnSave').click(function () {
                 if ($('#txtSubject').val().trim() == "") {
                     alert('Subjet required');
-                    retunr;
+                    return;
                 }
                 if ($('#txtStart').val().trim() == "") {
                     alert('Start date required');
-                    retunr;
+                    return;
                 }
                
                 if ($('#chkIsFullDay').is(':checked') == false && $('#txtStart').val().trim() == "") {
                     alert('End date required');
-                    retunr;
+                    return;
                 }
                 else {
                     var startDate = moment($('textStart').val(), "DD/MM/YYYY HH:mm A").toDate();
@@ -239,27 +271,45 @@
                     End: $('#chkIsFullDay').is(':checked') ? null : $('#txtEnd').val().trim(),
                     Description: $('#txtDescription').val(),
                     ThemeColor: $('#ddThemeColor').val(),
+                    IsFullDay: $('#chkIsFullDay').is(':checked'),
                 }
                 SaveEvent(data);
             });
 
             function SaveEvent(data) {
-                $.ajax({
-                    type: "POST",
-                    url: "/home/SaveEvent",
-                    data: data,
-                    success: function (data) {
-                        if (data.status) {
-                            FetchEventAndRenderCalendar();
+                            
 
-                            $('#myModalSave').modal('hide');
-                        }
-                    },
-                    error: function () {
-                        alert('Ups! Tenemos un problema');
+                for (item in events) {
+                    if (data.ThemeColor >= item.color) {
+                        bandera = true;
                     }
-                })
+                    //if (1 == 1) {
+                    //    bandera = true;
+                    //}
+                }
+
+                if (!bandera) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/home/SaveEvent",
+                        data: data,
+                        success: function (data) {
+                            if (data.status) {
+                                FetchEventAndRenderCalendar();
+
+                                $('#myModalSave').modal('hide');
+                            }
+                        },
+                        error: function () {
+                            alert('Ups! Tenemos un problema');
+                        }
+                    })
+                } else {
+                    alert("El evento esta solapando otro evento, por favor cambie las fechas");
+                }
+
+                
             }
-        })
+        });
     </script>
 }
