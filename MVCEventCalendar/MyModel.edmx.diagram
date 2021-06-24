@@ -4,8 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0f74c0df810241e9ae9d1385e73a0cdd" Name="Diagram1">
-        <EntityTypeShape EntityType="MyDatabaseModel.Event" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="b786e73b8bc3452f9ab015024de8854a" Name="Diagram1">
+        <EntityTypeShape EntityType="CalendarModel.Events" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CalendarModel.Login" Width="1.5" PointX="4.625" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CalendarModel.Users" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <AssociationConnector Association="CalendarModel.fk_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="CalendarModel.fk_Login" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
