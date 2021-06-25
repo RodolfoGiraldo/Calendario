@@ -21,7 +21,7 @@ namespace MVCEventCalendar
         String patron = "arquesoft";
         protected void BtnIngresar_Click(object sender, EventArgs e)
         {
-            string conectar = "Server=tcp:calendar-arquesoft.database.windows.net,1433;Initial Catalog=Calendar;Persist Security Info=False;User ID=user-calendar-arquesoft;Password=Tortuga22;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;App=EntityFramework";
+            string conectar = "data source=DESKTOP-MIJ8A0U;initial catalog=Calendar;persist security info=True;user id=sa;password=Juanma22;MultipleActiveResultSets=True;App=EntityFramework";
             SqlConnection sqlConectar = new SqlConnection(conectar);
             SqlCommand cmd = new SqlCommand("ValidarUsuario", sqlConectar)
             {

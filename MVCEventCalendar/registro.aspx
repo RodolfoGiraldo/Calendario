@@ -9,20 +9,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <link href="Recursos/CSS/register.css" rel="stylesheet" />
 </head>
 <body class="form-control bg-light">
     <div class="container small">
         <div class="row">
-            <h2 class="text-center">Formulario de Registro</h2>
-            <div class="col">
+            <h2 class="text-center  testbox1" style="color:#FFff">Formulario de Registro</h2>
+            <div class="col form-control">
                 <form id="formulario_registro" class="form-check" runat="server">
-                    <div>
+                    <div class="">
                         <fieldset>
-                            <legend>Datos Personales</legend>
+                            <legend class="testbox">Datos Personales</legend>
                             <asp:Table runat="server">
                                 <asp:TableRow>
                                     <asp:TableCell>
-                                        <asp:Label runat="server" ID="lblNombreCompleto" Text="Nombre Completo:"></asp:Label>
+                                        <asp:Label runat="server" ID="lblNombreCompleto" Text="Nombre Completo:  "></asp:Label>
                                     </asp:TableCell>
                                     <asp:TableCell>
                                         <asp:TextBox CssClass="form-control" runat="server" ID="tbNombreCompleto" placeholder="ej. Juan Pablo"></asp:TextBox>
@@ -38,7 +39,12 @@
                                 </asp:TableRow>
                                 <asp:TableRow>
                                     <asp:TableCell>
-                                        <asp:Label runat="server" ID="lblFechaNacimiento" Text="Fecha de Nacimiento:"></asp:Label>
+                                        <br/>
+                                    </asp:TableCell>
+                                </asp:TableRow>
+                                <asp:TableRow>
+                                    <asp:TableCell>
+                                        <asp:Label runat="server" ID="lblFechaNacimiento" Text="F.Nacimiento:"></asp:Label>
                                     </asp:TableCell>
                                     <asp:TableCell>
                                         <asp:TextBox CssClass="form-control" runat="server" ID="tbFechaNacimiento" TextMode="Date"></asp:TextBox>
@@ -48,11 +54,11 @@
                         </fieldset>
                         <br />
                         <fieldset>
-                            <legend>Datos de Login</legend>
+                            <legend class="testbox">Datos de Login</legend>
                             <asp:Table runat="server">
                                 <asp:TableRow>
                                     <asp:TableCell>
-                                        <asp:Label runat="server" ID="lblCorreo" Text="Correo electronico:"></asp:Label>
+                                        <asp:Label runat="server" ID="lblCorreo" Text="Email:  "></asp:Label>
                                     </asp:TableCell>
                                     <asp:TableCell>
                                         <asp:TextBox runat="server" ID="tbCorreo" placeholder="example@micorreo.com"></asp:TextBox>
@@ -66,7 +72,7 @@
                                         <asp:TextBox runat="server" ID="tbPassword" TextMode="Password" placeholder="Password"></asp:TextBox>
                                     </asp:TableCell>
                                     <asp:TableCell>
-                                        <asp:Label runat="server" ID="lblConfirmarPassword" Text="Confirme Clave:"></asp:Label>
+                                        <asp:Label runat="server" ID="lblConfirmarPassword" Text="Confirme Clave:  "></asp:Label>
                                     </asp:TableCell>
                                     <asp:TableCell>
                                         <asp:TextBox runat="server" ID="tbConfirmarPassword" TextMode="Password" placeholder="Password"></asp:TextBox>
@@ -83,6 +89,7 @@
                         <br />
                         <div>
                             <asp:Button ID="BtnRegistrar" Text="Registrar" CssClass="btn btn-dark btn-primary" OnClick="BtnRegistrar_Click" runat="server" />
+                            <asp:Button ID="BtnRegresar" Text="Regresar" CssClass="btn btn-dark btn-primary" OnClick="BtnRegresar_Click" runat="server" />
                         </div>
                     </div>
                 </form>

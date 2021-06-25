@@ -78,15 +78,6 @@ namespace MVCEventCalendar
         protected global::System.Web.UI.WebControls.Label lblError;
 
         /// <summary>
-        /// Control btRegistrar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btRegistrar;
-
-        /// <summary>
         /// Control btnIngresar.
         /// </summary>
         /// <remarks>
@@ -94,5 +85,14 @@ namespace MVCEventCalendar
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnIngresar;
+
+        /// <summary>
+        /// Control btRegistrar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btRegistrar;
     }
 }

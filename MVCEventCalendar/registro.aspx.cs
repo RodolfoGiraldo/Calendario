@@ -20,7 +20,7 @@ namespace MVCEventCalendar
 
         }
 
-        SqlConnection conexion = new SqlConnection("Server=tcp:calendar-arquesoft.database.windows.net,1433;Initial Catalog=Calendar;Persist Security Info=False;User ID=user-calendar-arquesoft;Password=Tortuga22;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;App=EntityFramework");
+        SqlConnection conexion = new SqlConnection("data source=DESKTOP-MIJ8A0U;initial catalog=Calendar;persist security info=True;user id=sa;password=Juanma22;MultipleActiveResultSets=True;App=EntityFramework");
 
         void Limpiar()
         {
@@ -97,6 +97,10 @@ namespace MVCEventCalendar
                 }
             }
 
+        }
+        protected void BtnRegresar_Click(Object sender, EventArgs e)
+        {
+            Response.Redirect("/login.aspx");
         }
     }
 }

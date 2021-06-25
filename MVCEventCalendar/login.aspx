@@ -14,19 +14,20 @@
 </head>
 <body class="bg-light">
     <div class="wrapper">
-        <div class="formcontent">
+        <div class="login-screen">
            <form id="formulario_login" runat="server">
                 <div class="form-control">
-                    <div class="col-md-6 text-center mb-5">
+                    <div class="login login-screen">
                         <asp:label class="h3" ID="lblBienvenida" runat="server" text="Formulario login"></asp:label>
                     </div>
                     <div>
                         <asp:label  ID="LabelUsuario" runat="server" text="Usuario: "></asp:label>
-                        <asp:TextBox ID="tbUsuario" CssClass="form-control" runat="server" placeholder="Nombre de usuario"></asp:TextBox>
+                        <asp:TextBox ID="tbUsuario" CssClass="form-control" runat="server"></asp:TextBox>
                     </div>
+                    <br />
                     <div>
                         <asp:label  ID="LabelPassword" runat="server" text="Password: "></asp:label>
-                        <asp:TextBox ID="tbPassword" CssClass="form-control" TextMode="Password" runat="server" placeholder="Password"></asp:TextBox>
+                        <asp:TextBox ID="tbPassword" CssClass="form-control" TextMode="Password" runat="server" ></asp:TextBox>
                     </div>
                     <br />
                     <div class="row">
@@ -34,11 +35,11 @@
                     </div>
                     <br />
                     <div class="row">
-                        <asp:Button ID="btRegistrar" runat="server" Text="Registrate" CssClass="link-info" OnClick="BtnRegistrar_Click"/>
+                        <asp:Button  ID="btnIngresar" CssClass="btn btn-primary btn-dark" runat="server" text="Ingresar" OnClick="BtnIngresar_Click" /> 
                     </div>
                     <br />
                     <div class="row">
-                        <asp:Button  ID="btnIngresar" CssClass="btn btn-primary btn-dark" runat="server" text="Ingresar" OnClick="BtnIngresar_Click" /> 
+                        <asp:Button ID="btRegistrar" runat="server" Text="Registrate" CssClass="alert-light" OnClick="BtnRegistrar_Click"/>
                     </div>
                 </div>
            </form>
