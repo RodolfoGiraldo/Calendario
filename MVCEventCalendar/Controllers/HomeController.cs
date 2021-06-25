@@ -4,11 +4,28 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
+
+
 namespace MVCEventCalendar.Controllers
 {
     public class HomeController : Controller
     {
+
+   
         // GET: Home
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (Session["usuariologueado"] != null)
+            {
+                string usuariologueado = Session["usuariologueado"].ToString();
+                //lblBienvenida.Text = "Bienvenido/a " + usuariologueado;
+            }
+            else
+            {
+                Response.Redirect("Login_InfoToolsSV.aspx");
+            }
+        }
         public ActionResult Index()
         {
             return View();

@@ -147,8 +147,8 @@ D:\Visual2019\Calendario\MVCEventCalendar\bin\System.Web.Webpages.Deployment.xml
 D:\Visual2019\Calendario\MVCEventCalendar\bin\System.Web.Webpages.Razor.xml
 D:\Visual2019\Calendario\MVCEventCalendar\bin\System.Web.Helpers.xml
 D:\Visual2019\Calendario\MVCEventCalendar\bin\System.Web.Mvc.xml
-D:\Visual2019\Calendario\MVCEventCalendar\obj\Debug\MVCEventCalendar.csproj.AssemblyReference.cache
 D:\Visual2019\Calendario\MVCEventCalendar\obj\Debug\MVCEventCalendar.csproj.CoreCompileInputs.cache
 D:\Visual2019\Calendario\MVCEventCalendar\obj\Debug\MVCEventCalendar.csproj.CopyComplete
 D:\Visual2019\Calendario\MVCEventCalendar\obj\Debug\MVCEventCalendar.dll
 D:\Visual2019\Calendario\MVCEventCalendar\obj\Debug\MVCEventCalendar.pdb
+D:\Visual2019\Calendario\MVCEventCalendar\obj\Debug\MVCEventCalendar.csproj.AssemblyReference.cache
