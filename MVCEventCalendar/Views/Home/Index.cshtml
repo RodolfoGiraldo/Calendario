@@ -133,6 +133,7 @@
                 })
             }
 
+
             function GenerateCalender(events) {
                 $('#calender').fullCalendar('destroy');
                 $('#calender').fullCalendar({
@@ -177,18 +178,6 @@
                         $('#calendar').fullCalendar('unselect');
                     },
                     editable: true,
-                    /*eventDrop: function (event) {
-                        var data = {
-                            EventId: event.eventID,
-                            Subject: event.subject,
-                            Start: event.start.format('DD/MM/YYYY HH:mm A'),
-                            End: event.end != null ? event.end.format('DD/MM/YYYY HH:mm A') : null,
-                            Description: event.description,
-                            ThemeColor: event.color,
-                            IsFullDay: event.allDay
-                        };
-                        SaveEvent(data);
-                    }*/
                 })
             }
 
@@ -233,7 +222,6 @@
             function openAddEditForm() {
                 if (selectedEvent != null) {
                     $('#hdEventID').val(selectedEvent.eventID);
-                    $('#hdIdUser').val(selectedEvent.idUser);
                     $('#txtSubject').val(selectedEvent.title);
                     $('#txtStart').val(selectedEvent.start.format('DD/MM/YYYY HH:mm A'));
                     $('#chkIsFullDay').prop('checked', selectedEvent.allDay || false);
@@ -271,7 +259,6 @@
                 }
 
                 var data = {
-                    EventId: $('#hdIdUser').val(),
                     EventId: $('#hdEventID').val(),
                     Subject: $('#txtSubject').val().trim(),
                     Start: $('#txtStart').val().trim(),
@@ -279,21 +266,25 @@
                     Description: $('#txtDescription').val(),
                     ThemeColor: $('#ddThemeColor').val(),
                     IsFullDay: $('#chkIsFullDay').is(':checked'),
+                    IdUser: $('#hdIdUser').val(),
                 }
                 SaveEvent(data);
             });
 
             function SaveEvent(data) {
-                            
+                
 
-                for (item in events) {
-                    if (data.ThemeColor >= item.color) {
-                        bandera = true;
-                    }
-                    //if (1 == 1) {
+                events.forEach((value) => {
+
+                    //if (data.ThemeColor == value.color ) {
                     //    bandera = true;
                     //}
-                }
+
+                    if (data.EventId == value.color) {
+                        bandera = true;
+                    }
+                });
+               
 
                 if (!bandera) {
                     $.ajax({
@@ -312,6 +303,7 @@
                         }
                     })
                 } else {
+                    bandera = false;
                     alert("El evento esta solapando otro evento, por favor cambie las fechas");
                 }
 
