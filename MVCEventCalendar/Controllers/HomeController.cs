@@ -30,7 +30,6 @@ namespace MVCEventCalendar.Controllers
             {
                 var idUser = Session["idUsuario"];
 
-                var eventas = dc.Events.ToList();
                     var events = dc.Events.Where(b => b.IdUser == (long)idUser).ToList();
                 List<Events> eventoFinal = new List<Events>();
                     foreach (Events value in events)
@@ -51,27 +50,41 @@ namespace MVCEventCalendar.Controllers
             var status = false;
             using (MyDatabaseEntities dc = new MyDatabaseEntities())
             {
-                if(e.EventID > 0)
+                bool bandera = true;
+                var events = dc.Events.Where(b => b.IdUser == (long)idUser).ToList();
+                foreach (Events value in events)
                 {
-                    var v = dc.Events.Where(a => a.EventID == e.EventID).FirstOrDefault();
-                    if(v != null)
+                    if (e.Start >= value.Start && e.Start < value.End)
                     {
-                        v.Subject = e.Subject;
-                        v.Start = e.Start;
-                        v.End = e.End;
-                        v.Description = e.Description;
-                        v.IsFullDay = e.IsFullDay;
-                        v.ThemeColor = e.ThemeColor;
-                        v.IdUser = (long)idUser;
+                        bandera = false;
                     }
                 }
-                else
+
+
+                if (bandera)
                 {
-                    e.IdUser = (long)idUser;
-                    dc.Events.Add(e);
+                    if (e.EventID > 0)
+                    {
+                        var v = dc.Events.Where(a => a.EventID == e.EventID).FirstOrDefault();
+                        if (v != null)
+                        {
+                            v.Subject = e.Subject;
+                            v.Start = e.Start;
+                            v.End = e.End;
+                            v.Description = e.Description;
+                            v.IsFullDay = e.IsFullDay;
+                            v.ThemeColor = e.ThemeColor;
+                            v.IdUser = (long)idUser;
+                        }
+                    }
+                    else
+                    {
+                        e.IdUser = (long)idUser;
+                        dc.Events.Add(e);
+                    }
+                    dc.SaveChanges();
+                    status = true;
                 }
-                dc.SaveChanges();
-                status = true;
             }
             return new JsonResult { Data = new { status = status } };
         }

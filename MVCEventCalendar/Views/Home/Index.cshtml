@@ -272,37 +272,28 @@
             });
 
             function SaveEvent(data) {
-                
 
-                events.forEach((value) => {
+                $.ajax({
+                    type: "POST",
+                    url: "/home/SaveEvent",
+                    data: data,
+                    success: function (data) {
+                        if (data.status) {
+                            FetchEventAndRenderCalendar();
 
-                   
-                    if (data.EventId == value.color) {
-                        bandera = true;
+                            $('#myModalSave').modal('hide');
+                        } else {
+                            alert("El evento esta solapando otro evento, por favor cambie las fechas");
+                        }
+                    },
+                    error: function () {
+                        alert('Ups! Tenemos un problema');
                     }
-                });
+                })
+
                
 
-                if (!bandera) {
-                    $.ajax({
-                        type: "POST",
-                        url: "/home/SaveEvent",
-                        data: data,
-                        success: function (data) {
-                            if (data.status) {
-                                FetchEventAndRenderCalendar();
-
-                                $('#myModalSave').modal('hide');
-                            }
-                        },
-                        error: function () {
-                            alert('Ups! Tenemos un problema');
-                        }
-                    })
-                } else {
-                    bandera = false;
-                    alert("El evento esta solapando otro evento, por favor cambie las fechas");
-                }
+                
 
                 
             }
