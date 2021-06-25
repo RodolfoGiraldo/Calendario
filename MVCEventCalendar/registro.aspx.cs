@@ -61,9 +61,12 @@ namespace MVCEventCalendar
                             "'" + tbDireccion.Text + "','" + tbFechaNacimiento.Text + "',(EncryptByPassPhrase('" + patron + "','" + tbPassword.Text + "')))", conexion);
                         cmm.ExecuteNonQuery();
                         conexion.Close();
+                        BuscarIdUsuario(tbCorreo.Text);
                         Limpiar();
                         LeerDatos();
 
+                        Session["usuariologueado"] = tbCorreo.Text;
+                       
                         Response.Redirect("/Home/Index");
                     }
                     else
@@ -81,6 +84,19 @@ namespace MVCEventCalendar
             SqlDataAdapter da = new SqlDataAdapter(leerdatos);
             DataTable dt = new DataTable();
             da.Fill(dt);
+        }
+
+        public void BuscarIdUsuario(string correoAux)
+        {
+            using (MyDatabaseEntities dc = new MyDatabaseEntities())
+            {
+                var user = dc.Users.Where(b => b.correo == correoAux).ToList();
+                foreach (Users value in user)
+                {
+                    Session["idUsuario"] = value.id;
+                }
+            }
+
         }
     }
 }

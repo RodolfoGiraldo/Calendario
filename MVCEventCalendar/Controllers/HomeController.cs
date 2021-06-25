@@ -11,9 +11,16 @@ namespace MVCEventCalendar.Controllers
 {
     public class HomeController : Controller
     {
+         
+
 
         public ActionResult Index()
         {
+            
+            if (Session["usuariologueado"] == null)
+            {
+                 Response.Redirect("../login.aspx");
+            }
             return View();
         }
 
@@ -21,10 +28,10 @@ namespace MVCEventCalendar.Controllers
         {
             using (MyDatabaseEntities dc = new MyDatabaseEntities())
             {
-                
+                var idUser = Session["idUsuario"];
 
-                    var eventas = dc.Events.ToList();
-                    var events = dc.Events.Where(b => b.IdUser == 10).ToList();
+                var eventas = dc.Events.ToList();
+                    var events = dc.Events.Where(b => b.IdUser == (long)idUser).ToList();
                 List<Events> eventoFinal = new List<Events>();
                     foreach (Events value in events)
                 {
@@ -40,6 +47,7 @@ namespace MVCEventCalendar.Controllers
 
         [HttpPost]
         public JsonResult SaveEvent(Events e){
+            var idUser = Session["idUsuario"];
             var status = false;
             using (MyDatabaseEntities dc = new MyDatabaseEntities())
             {
@@ -59,7 +67,7 @@ namespace MVCEventCalendar.Controllers
                 }
                 else
                 {
-                    e.IdUser = 10;
+                    e.IdUser = (long)idUser;
                     dc.Events.Add(e);
                 }
                 dc.SaveChanges();

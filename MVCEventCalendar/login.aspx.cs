@@ -15,7 +15,7 @@ namespace MVCEventCalendar
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            Session["usuariologueado"] = null;
         }
 
         String patron = "arquesoft";
@@ -34,8 +34,9 @@ namespace MVCEventCalendar
             SqlDataReader dr = cmd.ExecuteReader();
             if (dr.Read())
             {
-                
+
                 //Agregamos una sesion de usuario
+                BuscarIdUsuario(tbUsuario.Text);
                 Session["usuariologueado"] = tbUsuario.Text;
                 Response.Redirect("/Home/Index");
             }
@@ -50,6 +51,19 @@ namespace MVCEventCalendar
         public  void BtnRegistrar_Click(object sender, EventArgs e)
         {
             Response.Redirect("/registro.aspx");
+        }
+
+        public void BuscarIdUsuario(string correoAux)
+        {
+            using (MyDatabaseEntities dc = new MyDatabaseEntities())
+            {
+                var user = dc.Users.Where(b => b.correo == correoAux).ToList();
+                foreach (Users value in user)
+                {
+                    Session["idUsuario"] = value.id;
+                }
+            }
+               
         }
     }
 }
