@@ -54,7 +54,7 @@ namespace MVCEventCalendar.Controllers
                 var events = dc.Events.Where(b => b.IdUser == (long)idUser).ToList();
                 foreach (Events value in events)
                 {
-                    if (e.Start >= value.Start && e.Start < value.End)
+                    if (e.Start >= value.Start && e.Start < value.End && e.EventID != value.EventID)
                     {
                         bandera = false;
                     }
