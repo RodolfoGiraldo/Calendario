@@ -199,7 +199,6 @@ C:\Users\rodol\Desktop\Calendar\Calendario\MVCEventCalendar\bin\System.Web.Webpa
 C:\Users\rodol\Desktop\Calendar\Calendario\MVCEventCalendar\bin\System.Web.Webpages.Razor.xml
 C:\Users\rodol\Desktop\Calendar\Calendario\MVCEventCalendar\bin\System.Web.Helpers.xml
 C:\Users\rodol\Desktop\Calendar\Calendario\MVCEventCalendar\bin\System.Web.Mvc.xml
-C:\Users\rodol\Desktop\Calendar\Calendario\MVCEventCalendar\obj\Debug\MVCEventCalendar.csproj.AssemblyReference.cache
 C:\Users\rodol\Desktop\Calendar\Calendario\MVCEventCalendar\obj\Debug\MVCEventCalendar.csproj.CoreCompileInputs.cache
 C:\Users\rodol\Desktop\Calendar\Calendario\MVCEventCalendar\obj\Debug\MVCEventCalendar.csproj.CopyComplete
 C:\Users\rodol\Desktop\Calendar\Calendario\MVCEventCalendar\obj\Debug\MVCEventCalendar.dll

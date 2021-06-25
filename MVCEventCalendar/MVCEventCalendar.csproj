@@ -145,6 +145,7 @@
       <LastGenOutput>MyModel.cs</LastGenOutput>
     </Content>
     <Content Include="Recursos\CSS\estilos.css" />
+    <Content Include="Recursos\CSS\register.css" />
     <Content Include="registro.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
