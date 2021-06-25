@@ -22,7 +22,6 @@ namespace MVCEventCalendar
         public string ThemeColor { get; set; }
         public bool IsFullDay { get; set; }
         public Nullable<long> IdUser { get; set; }
-    
-        public virtual Users Users { get; set; }
+        public  virtual  Users Users { get; set; }
     }
 }

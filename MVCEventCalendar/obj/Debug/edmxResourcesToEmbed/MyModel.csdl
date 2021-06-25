@@ -33,6 +33,7 @@
     <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="fechaNacimiento" Type="DateTime" Precision="0" />
+    <Property Name="Password" Type="Binary" MaxLength="500" FixedLength="false" Nullable="false" />
     <NavigationProperty Name="Events" Relationship="Self.fk_Users" FromRole="Users" ToRole="Events" />
     <NavigationProperty Name="Login" Relationship="Self.fk_Login" FromRole="Users" ToRole="Login" />
   </EntityType>

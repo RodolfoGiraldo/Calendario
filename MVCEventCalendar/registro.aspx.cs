@@ -20,7 +20,7 @@ namespace MVCEventCalendar
 
         }
 
-        SqlConnection conexion = new SqlConnection("data source=DESKTOP-MIJ8A0U;initial catalog=Calendar;user id=sa;password=Juanma22;multipleactiveresultsets=True;application name=EntityFramework");
+        SqlConnection conexion = new SqlConnection("data source=DESKTOP-69L00BK;initial catalog=Calendar;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework");
 
         void Limpiar()
         {

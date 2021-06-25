@@ -31,6 +31,7 @@
     <Property Name="correo" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="direccion" Type="nvarchar" MaxLength="50" />
     <Property Name="fechaNacimiento" Type="date" />
+    <Property Name="Password" Type="varbinary" MaxLength="500" Nullable="false" />
   </EntityType>
   <Association Name="fk_Login">
     <End Role="Users" Type="Self.Users" Multiplicity="0..1" />

@@ -33,6 +33,7 @@
           <ScalarProperty Name="correo" ColumnName="correo" />
           <ScalarProperty Name="direccion" ColumnName="direccion" />
           <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

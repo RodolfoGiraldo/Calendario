@@ -12,20 +12,6 @@ namespace MVCEventCalendar.Controllers
     public class HomeController : Controller
     {
 
-   
-        // GET: Home
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (Session["usuariologueado"] != null)
-            {
-                string usuariologueado = Session["usuariologueado"].ToString();
-                //lblBienvenida.Text = "Bienvenido/a " + usuariologueado;
-            }
-            else
-            {
-                Response.Redirect("Login_InfoToolsSV.aspx");
-            }
-        }
         public ActionResult Index()
         {
             return View();
@@ -35,8 +21,20 @@ namespace MVCEventCalendar.Controllers
         {
             using (MyDatabaseEntities dc = new MyDatabaseEntities())
             {
-                var events = dc.Events.ToList();
-                return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                
+
+                    var eventas = dc.Events.ToList();
+                    var events = dc.Events.Where(b => b.IdUser == 10).ToList();
+                List<Events> eventoFinal = new List<Events>();
+                    foreach (Events value in events)
+                {
+                    
+                    value.Users = new Users();
+
+                    eventoFinal.Add(value);
+                }
+                    return new JsonResult { Data = eventoFinal, JsonRequestBehavior = JsonRequestBehavior.AllowGet,};
+                
             }
         }
 
@@ -56,10 +54,12 @@ namespace MVCEventCalendar.Controllers
                         v.Description = e.Description;
                         v.IsFullDay = e.IsFullDay;
                         v.ThemeColor = e.ThemeColor;
+                        v.IdUser = e.IdUser;
                     }
                 }
                 else
                 {
+                    e.IdUser = 10;
                     dc.Events.Add(e);
                 }
                 dc.SaveChanges();
